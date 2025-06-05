@@ -150,3 +150,19 @@ object Main extends App {                  // Scala automatically creates Main c
 * **Interactive Tutorials:** [https://www.scala-exercises.org/](https://www.scala-exercises.org/)
 
 ---
+
+
+
+
+
+
+| **Level**                          | **Description**                                                          | **Key Metrics / Checks**                                                                                        | **L1**                                      | **L2**                                                                               |
+| ---------------------------------- | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------ |
+| **1. Completeness**                | Ensure all required data is present and no records or fields are missing | % missing values per feature<br>Batch row count consistency<br>Missing field detection                          | Missing values<br>Row counts                | Null rate<br>Missing feature flags<br>Empty strings<br>Non-null % per column         |
+| **2. Consistency**                 | Verify data adheres to expected schemas, formats, and business rules     | Data type validation<br>Format checks (dates, codes)<br>Referential integrity                                   | Schema checks<br>Business rules             | Data type match<br>Pattern mismatch<br>Foreign key match rate<br>Value format errors |
+| **3. Uniqueness & Cardinality**    | Confirm data uniqueness and valid categorical cardinality                | Duplicate record detection<br>Cardinality checks on categorical features                                        | Uniqueness checks<br>High-cardinality flags | Duplicate rows<br>Repeated IDs<br>Cardinality ratio<br>Unexpected new categories     |
+| **4. Drift Detection**             | Detect distributional changes compared to baseline or historical data    | PSI, KS-test p-values<br>Shifts in mean, median, skewness, kurtosis                                             | KS test<br>PSI                              | Skewness<br>Kurtosis<br>Mean shift<br>Median shift<br>Distribution overlap           |
+| **5. Stability Over Time**         | Track feature value stability and variability trends across batches      | Variance/standard deviation trends<br>Feature value trend analysis<br>Sample size stability                     | Levene test<br>Trend analysis               | Std dev<br>Mean/median fluctuation<br>Week-over-week delta<br>Seasonal variance      |
+| **6. Anomaly & Outlier Detection** | Identify rare or unexpected values that may affect training              | Outlier counts and magnitude<br>Sudden spikes in nulls or zeros<br>Unusual correlations or feature interactions | Z-score / IQR<br>Univariate outlier check   | Max/min thresholds<br>Median deviation<br>Rare category frequency<br>Spike detection |
+| **7. Data Freshness & Timeliness** | Ensure data is delivered on time and is recent enough for training       | Batch arrival time<br>Data timestamp validation<br>Lag or stale data detection                                  | Timeliness check<br>Latency thresholds      | Delay in arrival<br>Outdated timestamps<br>Time gap from source<br>Late batch alerts |
+
