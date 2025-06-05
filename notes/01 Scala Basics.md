@@ -29,8 +29,6 @@
   while (x < 10) { x += 1 }
   ```
 
----
-
 ### 2. **Object-Oriented & Functional Features**
 
 * **Classes and Objects**
