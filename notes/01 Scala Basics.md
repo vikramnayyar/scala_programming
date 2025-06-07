@@ -185,7 +185,7 @@ object Main extends App {                  // Scala automatically creates Main c
 
   * Set Operations
 
-  | Operation              | Syntax                          | Description                          | Example                                       | Result                      |                |
+| Operation              | Syntax                          | Description                          | Example                                       | Result                      |                |
 | ---------------------- | ------------------------------- | ------------------------------------ | --------------------------------------------- | --------------------------- | -------------- |
 | Create a set           | `val s = Set(1, 2, 3)`          | Immutable set of elements            | `Set(1, 2, 3)`                                | `Set(1, 2, 3)`              |                |
 | Add element            | `s + 4`                         | Returns new set with element added   | `Set(1, 2, 3) + 4`                            | `Set(1, 2, 3, 4)`           |                |
