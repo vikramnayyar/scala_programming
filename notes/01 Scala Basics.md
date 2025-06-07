@@ -13,6 +13,7 @@
   `Int`, `Double`, `Boolean`, `String`, `Char`, `Unit` (like void), `Any`, `Nothing`
 
 * **Functions**
+  * No Returns ----> Last Statement --gets--> Returned (Always) 
   ```scala
   def add(a: Int, b: Int): Int = a + b        
 
@@ -28,6 +29,37 @@
 
   while (x < 10) { x += 1 }
   ```
+
+  ```
+  def describeNumber(n: Int): String = {
+    if (n < 0)
+      "negative"
+    else if (n == 0)
+      "zero"
+    else
+      "positive"  // This is the last expression — it will be returned
+  }
+  ```
+
+  * Return Works ----> Not Used --for--> Convinience | Simplicity
+  ```
+  def describeNumber(n: Int): String = {
+    if (n < 0)
+      return "negative"
+    else if (n == 0)      // double equal is same in Scala also
+      return "positive"
+  }
+  ``` 
+  * Above code --gives_error--> Must Include ----> n>0 (All if cases, Unlike Python)
+
+  * Braces ----> Needed ---->  Multiline Loops --not_needed--> Single Loops
+  ```
+  if (n < 0) {
+  println("Negative number")
+  "negative"
+  }
+  ``
+  
 
 ### 2. **Object-Oriented & Functional Features**
 
