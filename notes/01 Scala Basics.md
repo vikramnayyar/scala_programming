@@ -47,7 +47,9 @@
     if (n < 0)
       return "negative"
     else if (n == 0)      // double equal is same in Scala also
-      return "positive"
+      return "zero"
+    else if (n > 0)      // double equal is same in Scala also
+      return "positive"  
   }
   ``` 
   * Above code --gives_error--> Must Include ----> n>0 (All if cases, Unlike Python)
@@ -58,9 +60,22 @@
   println("Negative number")
   "negative"
   }
-  ``
-  
+  ```
 
+  * Calling Function
+  ```
+  def add(a: Int, b: Int): Int = {
+    val sum = a + b
+    sum
+  }
+  
+  val x = 1
+  val y = 2
+  
+  val res = add(x, y)
+  println(res)  // This will print 3
+  ```
+  
 ### 2. **Object-Oriented & Functional Features**
 
 * **Classes and Objects**
@@ -69,12 +84,13 @@
 def add(a: Int, b: Int): Int = a + b
 
 // Anonymous function
-val multiply = (x: Int, y: Int) => x * y
+val multiply = (x: Int, y) => x * y
+
+// below is var not function
+val multiply = (x: Int, y) => x * y
 ```
 
-
 * **Traits** (like interfaces)
-
 ```scala
 trait Logger {
   def log(message: String): Unit = println(s"LOG MESSAGE: $message")
@@ -107,7 +123,7 @@ object Main extends App {                  // Scala automatically creates Main c
   Pass functions as parameters, return functions.
 
 
-### 3. **Collections & Higher-Order Functions**
+### 3. **Collections & Operations**
 
 * **Collections**
 
@@ -118,15 +134,102 @@ object Main extends App {                  // Scala automatically creates Main c
   val set = Set(1, 2, 3)
   ```
 
-* **Higher-Order Functions**
-
-  ```scala
-  list.map(_ * 2)        // List(2, 4, 6)
-  list.filter(_ % 2 == 1) // List(1, 3)
-  list.reduce(_ + _)     // 6
+* **List vs Array**
+  * Lists ----> Immutable --can--> Prepend | Append
+  ```
+  val list = List(1, 2, 3)
+  val newList = 0 :: list  // Prepend 0, returns new list: List(0, 1, 2, 3)
+  println(list)            // Original list unchanged: List(1, 2, 3)
+  println(newList)         // New list: List(0, 1, 2, 3)
   ```
 
----
+  * Array ----> mutable --cannot--> append | prepend     
+  ```
+  val array = Array(1, 2, 3)
+  array(0) = 10           // Update element at index 0
+  println(array.mkString(", "))  // Prints: 10, 2, 3
+  
+  ```
+
+  * Operations in Lists
+  zipWithIndex --same_as--> enumerate()
+  zipWithIndex --works--> Lists + Arrays (any sequences)
+
+  ```
+  val list = List("a", "b", "c")
+  
+  for ((value, index) <- list.zipWithIndex) {
+    println(s"Index: $index, Value: $value")
+  }
+  ```
+
+  * Common Operations on Data Structures
+  
+  | Operation            | List                            | Array                           | Set                             |
+  | -------------------- | ------------------------------- | ------------------------------- | ------------------------------- |
+  | **Create**           | `List(1, 2, 3)`                 | `Array(1, 2, 3)`                | `Set(1, 2, 3)`                  |
+  | **Access by index**  | `list(i)` (slow, O(n))          | `array(i)` (fast, O(1))         | No direct indexing (unordered)  |
+  | **Iteration**        | `list.foreach(println)`         | `array.foreach(println)`        | `set.foreach(println)`          |
+  | **Append**           | `list :+ 4` (slow, creates new) | Not possible (fixed size)       | `set + elem` (creates new set)  |
+  | **Prepend**          | `elem :: list` (fast)           | Not applicable                  | Not applicable                  |
+  | **Update element**   | Not possible (immutable)        | `array(i) = newValue` (mutable) | Not applicable (immutable)      |
+  | **Filter**           | `list.filter(_ > 2)`            | `array.filter(_ > 2)`           | `set.filter(_ > 2)`             |
+  | **Map/Transform**    | `list.map(_ * 2)`               | `array.map(_ * 2)`              | `set.map(_ * 2)`                |
+  | **Contains**         | `list.contains(3)`              | `array.contains(3)`             | `set.contains(3)` (fast lookup) |
+  | **Length**           | `list.length`                   | `array.length`                  | `set.size`                      |
+  | **Zip with index**   | `list.zipWithIndex`             | `array.zipWithIndex`            | No natural order, not typical   |
+  | **Convert to other** | `list.toArray`, `list.toSet`    | `array.toList`, `array.toSet`   | `set.toList`, `set.toArray`     |
+
+  * Case --always_replaceable--> if-else Ladder --can_stay--> Pythonic
+
+
+  * Set Operations
+
+  | Operation              | Syntax                          | Description                          | Example                                       | Result                      |                |
+| ---------------------- | ------------------------------- | ------------------------------------ | --------------------------------------------- | --------------------------- | -------------- |
+| Create a set           | `val s = Set(1, 2, 3)`          | Immutable set of elements            | `Set(1, 2, 3)`                                | `Set(1, 2, 3)`              |                |
+| Add element            | `s + 4`                         | Returns new set with element added   | `Set(1, 2, 3) + 4`                            | `Set(1, 2, 3, 4)`           |                |
+| Remove element         | `s - 2`                         | Returns new set with element removed | `Set(1, 2, 3) - 2`                            | `Set(1, 3)`                 |                |
+| Union                  | `s1 union s2` or \`s1           | s2\`                                 | Combine elements from both sets               | `Set(1, 2) union Set(2, 3)` | `Set(1, 2, 3)` |
+| Intersection           | `s1 intersect s2` or `s1 & s2`  | Elements common to both sets         | `Set(1, 2, 3) intersect Set(2, 3, 4)`         | `Set(2, 3)`                 |                |
+| Difference             | `s1 diff s2` or `s1 &~ s2`      | Elements in s1 but not in s2         | `Set(1, 2, 3) diff Set(2, 4)`                 | `Set(1, 3)`                 |                |
+| Check contains element | `s.contains(elem)` or `s(elem)` | Check if element exists              | `Set(1, 2, 3).contains(2)` or `Set(1,2,3)(2)` | `true`                      |                |
+| Size                   | `s.size`                        | Number of elements in the set        | `Set(1, 2, 3).size`                           | `3`                         |                |
+
+
+* **Numerical Ooperations**
+
+| Operation   | Scala Syntax                    | Returns | Notes                             |
+| ----------- | ------------------------------- | ------- | --------------------------------- |
+| **Sum**     | `list.sum`                      | `15`    | Works directly on numeric lists   |
+| **Max**     | `list.max`                      | `5`     | Largest element                   |
+| **Min**     | `list.min`                      | `1`     | Smallest element                  |
+| **Average** | `list.sum.toDouble / list.size` | `3.0`   | Manual mean (no built-in `.mean`) |
+| **Length**  | `list.length`                   | `5`     | Number of elements                |
+
+
+* **Statistical Operations - Breeze**
+```
+import breeze.stats._
+
+val data = DenseVector(1.0, 2.0, 3.0, 4.0, 5.0)    // DenseVector --just-->  np.array --limited--> Slicing | Broadcasting
+
+mean(data)     // 3.0
+median(data)   // 3.0
+variance(data) // 2.0
+```
+
+| Metric       | Native Scala Support | With Breeze (Recommended) | Manual Computation Possible |
+| ------------ | -------------------- | ------------------------- | --------------------------- |
+| **Mean**     | ✅ (manual)           | ✅ `mean()`                | ✅                           |
+| **Median**   | ✅ (manual)           | ✅ `median()`              | ✅                           |
+| **IQR**      | ❌                    | ❌ (manual needed)         | ✅                           |
+| **Skewness** | ❌                    | ✅ `skewness()` (Breeze)   | ✅ (complex)                 |
+| **Kurtosis** | ❌                    | ✅ `kurtosis()` (Breeze)   | ✅ (complex)                 |
+| **Std Dev**  | ❌                    | ✅ `stddev()`              | ✅                           |
+
+
+    
 
 ### 4. **Immutability & Case Classes**
 
@@ -143,7 +246,6 @@ object Main extends App {                  // Scala automatically creates Main c
   println(p1.name)      // Bob
   ```
 
----
 
 ### 5. **Pattern Matching & Option**
 
