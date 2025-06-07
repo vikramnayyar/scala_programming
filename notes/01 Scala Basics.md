@@ -75,7 +75,7 @@ val multiply = (x: Int, y: Int) => x * y
 
 * **Traits** (like interfaces)
 
-  ```scala
+```scala
 trait Logger {
   def log(message: String): Unit = println(s"LOG MESSAGE: $message")
 }
