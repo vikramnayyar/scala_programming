@@ -4,10 +4,22 @@
 * **Variables**
 
   ```scala
-  var x: Int = 5       // mutable
+  var x: Int = 5       // mutable - 
   val x: Int = 5       // immutable
   val y: String = "Hi" // immutable ----> more computationally efficient
   ```
+* **val vs var --only_for--> Overwriting Control** 
+```
+val listVal = List(1, 2, 3)
+// listVal = List(4, 5)  // Error: reassignment to val
+
+var listVar = List(1, 2, 3)
+listVar = List(4, 5)     // Allowed: variable reassigned
+
+// Neither listVal nor listVar can do element mutation:
+listVal(0) = 10         // Error: value update not allowed
+listVar(0) = 10         // Error: value update not allowed
+```
 
 * **Data Types**
   `Int`, `Double`, `Boolean`, `String`, `Char`, `Unit` (like void), `Any`, `Nothing`
