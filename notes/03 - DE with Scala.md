@@ -109,9 +109,45 @@
     | **cartesian()**      | Cartesian product (shuffle)           | N/A                                                       | Extremely expensive; no workaround                                                  | ❌ No                        |
 
 
+    - Broadcast Join
+      - Broadcasting Join --broadcasts--> Smaller Table ----> Across Clusters (All)       
+        - Large Fact Table --joins--> Small Dimension Table --prefer--> Join Broadcasting
+        - Broadcasting --mostly_happens--> Auto ----> file size < 10 Mb
+      
+      ```
+      import org.apache.spark.sql.functions.broadcast
+      
+      val df_productDim = spark.read.parquet("s3://bucket/product_catalog.parquet")
+      val df_promoSales = spark.read.parquet("s3://bucket/promo_sales.parquet")
+      
+      val df_joined = df_promoSales.join(broadcast(df_productDim), Seq("product_id")) // broadcasts df_productDim (explicitly)
+      
+      df_joined.show()
+      ```
 
+  
+    - Caching --stores--> intermediate results --optimal_when--> df Reusing
+    
+    ```
+    import org.apache.spark.sql.functions.col
+    
+    val df_promo = spark.read.parquet("s3://bucket/promo_data.parquet")
+    
+    val df_activePromos = df_promo.filter(col("status") === "ACTIVE").cache()
+    
+    df_activePromos.count()  // triggers caching
+    df_activePromos.show()   // faster, uses cached data
+    ```
 
+Below is Pending, not priority for now
 
+* Build ETL Pipelines
 
+  * Use Scala with Spark to build scalable ETL pipelines.
+  * Work with structured and semi-structured data (JSON, Parquet, Avro).
+  * Understand schema evolution and data serialization formats.
+  * Big Data Ecosystem Integration
 
-
+* Explore how Scala integrates with Hadoop ecosystem.
+  * Learn to use Apache Kafka for streaming with Scala.
+  * Explore Apache Flink or Akka Streams (optional but useful).
