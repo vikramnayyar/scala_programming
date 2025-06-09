@@ -45,7 +45,7 @@
   * Learn to use Apache Kafka for streaming with Scala.
   * Explore Apache Flink or Akka Streams (optional but useful).
 
-### 4. **Project & Practice**
+### 4. **Optional - Project & Practice**
 
 * Build a small data pipeline project using Scala and Spark (e.g., ingest, transform, and store data).
 * Write Spark batch jobs and streaming jobs.
@@ -53,7 +53,7 @@
 * Deploy Spark jobs on a cluster (local, cloud-based, or managed services like Databricks).
 * Use version control (Git) for your projects.
 
-### 5. **Supplement with Data Engineering Concepts**
+### 5. **Optional - Supplement with Data Engineering Concepts**
 
 * Study distributed computing basics.
 * Learn about data modeling and warehousing.
