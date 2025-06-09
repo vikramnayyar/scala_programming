@@ -67,16 +67,4 @@
 
 ---
 
-## Weekly Plan (Example for 8 weeks)
-
-| Week | Focus                            | Activities/Resources                          |
-| ---- | -------------------------------- | --------------------------------------------- |
-| 1-2  | Scala Basics                     | Tutorials, small coding exercises             |
-| 3    | Advanced Scala Features          | Study Futures, implicits, collections         |
-| 4-5  | Spark Basics & Scala Integration | Build simple Spark jobs with Scala            |
-| 6    | ETL Pipeline Project             | Build end-to-end pipeline using Spark + Scala |
-| 7    | Optimization and Advanced Spark  | Learn Spark optimizations, Streaming          |
-| 8    | Ecosystem Tools & Deployment     | Kafka integration, cluster deployment         |
-
----
 
